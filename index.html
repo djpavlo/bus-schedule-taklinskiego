@@ -3,189 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bus Schedule - Taklińskiego 01 NŻ Stop</title>
+    <title>Bus Schedule - Taklińskiego ⇄ Borek Fałęcki</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            padding: 20px; 
         }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            overflow: hidden;
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            background: white; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            overflow: hidden; 
         }
-        
-        .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            text-align: center;
-            padding: 30px;
+        .header { 
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); 
+            color: white; 
+            text-align: center; 
+            padding: 30px; 
         }
-        
-        .header h1 {
-            margin: 0;
-            font-size: 2.2em;
-            font-weight: 300;
+        .header h1 { 
+            font-size: 2.2em; 
+            font-weight: 300; 
+            margin-bottom: 10px; 
         }
-        
-        .header p {
-            margin: 10px 0 0 0;
-            opacity: 0.9;
-            font-size: 1.1em;
+        .direction-tabs { 
+            display: flex; 
+            background: #e9ecef; 
         }
-        
-        .tabs {
-            display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e9ecef;
+        .direction-tab { 
+            flex: 1; 
+            padding: 15px; 
+            text-align: center; 
+            cursor: pointer; 
+            background: #e9ecef; 
+            border: none; 
+            font-size: 1.2em; 
+            font-weight: 600; 
+            color: #495057; 
+            transition: all 0.3s ease; 
         }
-        
-        .tab {
-            flex: 1;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background: #f8f9fa;
-            border: none;
-            font-size: 1.1em;
-            font-weight: 500;
-            color: #495057;
-            transition: all 0.3s ease;
+        .direction-tab.active { 
+            background: #28a745; 
+            color: white; 
         }
-        
-        .tab:hover {
-            background: #e9ecef;
+        .tabs { 
+            display: flex; 
+            background: #f8f9fa; 
         }
-        
-        .tab.active {
-            background: #007bff;
-            color: white;
-            box-shadow: inset 0 -3px 0 #0056b3;
+        .tab { 
+            flex: 1; 
+            padding: 20px; 
+            text-align: center; 
+            cursor: pointer; 
+            background: #f8f9fa; 
+            border: none; 
+            font-size: 1.1em; 
+            font-weight: 500; 
+            color: #495057; 
+            transition: all 0.3s ease; 
         }
-        
-        .schedule-content {
-            padding: 30px;
+        .tab.active { 
+            background: #007bff; 
+            color: white; 
         }
-        
-        .schedule-table {
-            display: none;
+        .schedule-content { 
+            padding: 30px; 
         }
-        
-        .schedule-table.active {
-            display: block;
+        .direction-content { 
+            display: none; 
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            font-size: 14px;
+        .direction-content.active { 
+            display: block; 
         }
-        
-        th {
-            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
-            color: white;
-            padding: 15px 8px;
-            text-align: center;
-            font-weight: 600;
-            border: 1px solid #45a049;
+        .schedule-table { 
+            display: none; 
         }
-        
-        td {
-            padding: 12px 8px;
-            text-align: center;
-            border: 1px solid #ddd;
-            transition: background-color 0.2s ease;
+        .schedule-table.active { 
+            display: block; 
         }
-        
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            font-size: 14px; 
         }
-        
-        tr:hover {
-            background-color: #e3f2fd;
+        th { 
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); 
+            color: white; 
+            padding: 15px 8px; 
+            text-align: center; 
+            font-weight: 600; 
+            border: 1px solid #45a049; 
         }
-        
-        .bus-number {
-            font-weight: bold;
-            color: #007bff;
-            font-size: 16px;
+        td { 
+            padding: 12px 8px; 
+            text-align: center; 
+            border: 1px solid #ddd; 
         }
-        
-        .time {
-            font-family: 'Courier New', monospace;
-            font-weight: 500;
+        tr:nth-child(even) { 
+            background-color: #f8f9fa; 
         }
-        
-        .legend {
-            margin-top: 30px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            border-left: 4px solid #007bff;
+        tr:hover { 
+            background-color: #e3f2fd; 
         }
-        
-        .legend h3 {
-            margin-top: 0;
-            color: #007bff;
+        .bus-number { 
+            font-weight: bold; 
+            color: #007bff; 
+            font-size: 16px; 
         }
-        
-        .bus-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+        .time { 
+            font-family: 'Courier New', monospace; 
+            font-weight: 500; 
         }
-        
-        .bus-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
+        .legend { 
+            margin-top: 30px; 
+            padding: 20px; 
+            background: #f8f9fa; 
+            border-radius: 10px; 
+            border-left: 4px solid #007bff; 
         }
-        
-        .route-info {
-            font-size: 12px;
-            color: #6c757d;
-            margin-top: 5px;
+        .legend h3 { 
+            color: #007bff; 
+            margin-bottom: 15px; 
         }
-        
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-            
-            .header {
-                padding: 20px;
-            }
-            
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .schedule-content {
-                padding: 15px;
-            }
-            
-            .tabs {
-                flex-direction: column;
-            }
-            
-            table {
-                font-size: 12px;
-            }
-            
-            th, td {
-                padding: 8px 4px;
-            }
+        .loading { 
+            text-align: center; 
+            padding: 50px; 
+            font-size: 18px; 
+            color: #666; 
+        }
+        .error { 
+            text-align: center; 
+            padding: 50px; 
+            color: #dc3545; 
+            background: #f8d7da; 
+            border: 1px solid #f5c6cb; 
+            border-radius: 5px; 
+            margin: 20px; 
+        }
+        @media (max-width: 768px) { 
+            .container { margin: 10px; } 
+            .header { padding: 20px; } 
+            .header h1 { font-size: 1.6em; } 
+            .schedule-content { padding: 15px; } 
+            .tabs, .direction-tabs { flex-direction: column; } 
+            table { font-size: 12px; } 
+            th, td { padding: 8px 4px; } 
         }
     </style>
 </head>
@@ -193,268 +161,515 @@
     <div class="container">
         <div class="header">
             <h1>Bus Schedule</h1>
-            <p>Stop: Taklińskiego 01 NŻ</p>
+            <p>Taklińskiego 01 NŻ ⇄ Borek Fałęcki 04</p>
         </div>
         
-        <div class="tabs">
-            <button class="tab active" onclick="showSchedule('weekdays')">Weekdays</button>
-            <button class="tab" onclick="showSchedule('saturdays')">Saturday</button>
-            <button class="tab" onclick="showSchedule('sundays')">Sunday & Holidays</button>
+        <div class="direction-tabs">
+            <button class="direction-tab active" onclick="showDirection('outbound', this)">Taklińskiego → Borek Fałęcki</button>
+            <button class="direction-tab" onclick="showDirection('inbound', this)">Borek Fałęcki → Taklińskiego</button>
         </div>
         
-        <div class="schedule-content">
-            <!-- Weekdays -->
-            <div id="weekdays" class="schedule-table active">
-                <h2>Weekdays (Monday - Friday)</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Departure</th>
-                            <th>Arrival</th>
-                            <th>Bus #</th>
-                            <th>Direction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="time">04:28</td><td class="time">04:44</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">05:12</td><td class="time">05:23</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">05:15</td><td class="time">05:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">05:32</td><td class="time">05:43</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">05:49</td><td class="time">06:05</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:02</td><td class="time">06:13</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:14</td><td class="time">06:30</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:31</td><td class="time">06:42</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:40</td><td class="time">06:51</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:49</td><td class="time">07:05</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:03</td><td class="time">07:14</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:24</td><td class="time">07:40</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:41</td><td class="time">07:52</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:59</td><td class="time">08:15</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:10</td><td class="time">08:21</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:16</td><td class="time">08:27</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:34</td><td class="time">08:50</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:51</td><td class="time">09:02</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:04</td><td class="time">09:20</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:40</td><td class="time">09:51</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:44</td><td class="time">10:00</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">10:19</td><td class="time">10:35</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">10:54</td><td class="time">11:10</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:10</td><td class="time">11:21</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:34</td><td class="time">11:50</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:14</td><td class="time">12:30</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:40</td><td class="time">12:51</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:54</td><td class="time">13:10</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">13:44</td><td class="time">14:00</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:10</td><td class="time">14:21</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:15</td><td class="time">14:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:55</td><td class="time">15:11</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:12</td><td class="time">15:23</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:30</td><td class="time">15:46</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:40</td><td class="time">15:51</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:47</td><td class="time">15:58</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:05</td><td class="time">16:21</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:22</td><td class="time">16:33</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:40</td><td class="time">16:56</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:57</td><td class="time">17:08</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:10</td><td class="time">17:21</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:15</td><td class="time">17:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:32</td><td class="time">17:43</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:50</td><td class="time">18:06</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:07</td><td class="time">18:18</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:25</td><td class="time">18:41</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:40</td><td class="time">18:51</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:42</td><td class="time">18:53</td><td class="bus-number">475</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:00</td><td class="time">19:16</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:35</td><td class="time">19:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:09</td><td class="time">20:20</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:10</td><td class="time">20:26</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:45</td><td class="time">21:01</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:20</td><td class="time">21:36</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:39</td><td class="time">21:50</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:55</td><td class="time">22:11</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">22:35</td><td class="time">22:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">23:04</td><td class="time">23:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">23:15</td><td class="time">23:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                    </tbody>
-                </table>
+        <div id="loading" class="loading">Loading schedule data...</div>
+        <div id="error" class="error" style="display: none;"></div>
+        
+        <!-- OUTBOUND -->
+        <div id="outbound" class="direction-content active">
+            <div class="tabs">
+                <button class="tab active" onclick="showSchedule('outbound', 'weekdays', this)">Weekdays</button>
+                <button class="tab" onclick="showSchedule('outbound', 'saturdays', this)">Saturday</button>
+                <button class="tab" onclick="showSchedule('outbound', 'sundays', this)">Sunday</button>
             </div>
             
-            <!-- Saturday -->
-            <div id="saturdays" class="schedule-table">
-                <h2>Saturday</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Departure</th>
-                            <th>Arrival</th>
-                            <th>Bus #</th>
-                            <th>Direction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="time">01:14</td><td class="time">01:30</td><td class="bus-number">610</td><td>Sidzina - Prądnik Czerwony</td></tr>
-                        <tr><td class="time">03:14</td><td class="time">03:30</td><td class="bus-number">610</td><td>Sidzina - Prądnik Czerwony</td></tr>
-                        <tr><td class="time">05:48</td><td class="time">06:04</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:28</td><td class="time">06:44</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:08</td><td class="time">07:24</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:48</td><td class="time">08:04</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:04</td><td class="time">08:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:26</td><td class="time">08:42</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:16</td><td class="time">09:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:34</td><td class="time">09:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:56</td><td class="time">10:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">10:36</td><td class="time">10:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:04</td><td class="time">11:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:16</td><td class="time">11:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:56</td><td class="time">12:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:34</td><td class="time">12:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:36</td><td class="time">12:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">13:16</td><td class="time">13:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">13:56</td><td class="time">14:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:04</td><td class="time">14:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:36</td><td class="time">14:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:34</td><td class="time">15:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:56</td><td class="time">16:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:36</td><td class="time">16:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:56</td><td class="time">17:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:04</td><td class="time">17:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:56</td><td class="time">18:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:34</td><td class="time">18:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:36</td><td class="time">18:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:16</td><td class="time">19:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:56</td><td class="time">20:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:04</td><td class="time">20:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:35</td><td class="time">20:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:34</td><td class="time">21:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:55</td><td class="time">22:11</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">22:35</td><td class="time">22:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">23:15</td><td class="time">23:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Sunday & Holidays -->
-            <div id="sundays" class="schedule-table">
-                <h2>Sunday & Holidays</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Departure</th>
-                            <th>Arrival</th>
-                            <th>Bus #</th>
-                            <th>Direction</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td class="time">01:14</td><td class="time">01:30</td><td class="bus-number">610</td><td>Sidzina - Prądnik Czerwony</td></tr>
-                        <tr><td class="time">03:14</td><td class="time">03:30</td><td class="bus-number">610</td><td>Sidzina - Prądnik Czerwony</td></tr>
-                        <tr><td class="time">05:48</td><td class="time">06:04</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">06:28</td><td class="time">06:44</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:08</td><td class="time">07:24</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">07:48</td><td class="time">08:04</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:04</td><td class="time">08:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">08:26</td><td class="time">08:42</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:16</td><td class="time">09:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:34</td><td class="time">09:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">09:56</td><td class="time">10:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">10:36</td><td class="time">10:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:04</td><td class="time">11:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:16</td><td class="time">11:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">11:56</td><td class="time">12:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:34</td><td class="time">12:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">12:36</td><td class="time">12:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">13:16</td><td class="time">13:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">13:56</td><td class="time">14:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:04</td><td class="time">14:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">14:36</td><td class="time">14:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:34</td><td class="time">15:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">15:56</td><td class="time">16:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:36</td><td class="time">16:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">16:56</td><td class="time">17:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:04</td><td class="time">17:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">17:56</td><td class="time">18:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:34</td><td class="time">18:45</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">18:36</td><td class="time">18:52</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:16</td><td class="time">19:32</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">19:56</td><td class="time">20:12</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:04</td><td class="time">20:15</td><td class="bus-number">243</td><td>Skawina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">20:35</td><td class="time">20:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">21:55</td><td class="time">22:11</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">22:35</td><td class="time">22:51</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                        <tr><td class="time">23:15</td><td class="time">23:31</td><td class="bus-number">175</td><td>Sidzina - Borek Fałęcki</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="legend">
-                <h3>Route Information:</h3>
-                <div class="bus-info">
-                    <div class="bus-card">
-                        <strong>Bus #175</strong>
-                        <div class="route-info">
-                            Route: Sidzina → Działowskiego → Petrażyckiego → Taklińskiego → Smoleńskiego → Poronińska → Zakopiańska → Sielska → Borek Fałęcki<br>
-                            <em>Main line with frequent service throughout the day</em>
-                        </div>
-                    </div>
-                    <div class="bus-card">
-                        <strong>Bus #243 (Agglomeration Line)</strong>
-                        <div class="route-info">
-                            Route: Skawina → ul. Jana Pawła II → ul. Popieluszki → ul. Korabnicka → ul. Leśna → ul. Graniczna → Petrażyckiego → Taklińskiego → Zakopiańska → Sielska → Borek Fałęcki<br>
-                            <em>Regular service connecting Skawina with Kraków</em>
-                        </div>
-                    </div>
-                    <div class="bus-card">
-                        <strong>Bus #475</strong>
-                        <div class="route-info">
-                            Route: Sidzina → Działowskiego → Petrażyckiego → Taklińskiego → Zakopiańska → Sielska → Borek Fałęcki<br>
-                            <em>Weekdays only: 05:32, 06:02, 06:31, 07:03, 07:41, 08:16, 08:51, 15:12, 15:47, 16:22, 16:57, 17:32, 18:07, 18:42</em>
-                        </div>
-                    </div>
-                    <div class="bus-card">
-                        <strong>Bus #610</strong>
-                        <div class="route-info">
-                            Route: Sidzina → (long route through multiple stops) → Prądnik Czerwony<br>
-                            <em>Weekend night service only: Saturday and Sunday at 01:14 and 03:14</em>
-                        </div>
-                    </div>
+            <div class="schedule-content">
+                <div id="outbound-weekdays" class="schedule-table active">
+                    <h2>Weekdays → Borek Fałęcki</h2>
+                    <table id="outbound-weekdays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
                 </div>
                 
+                <div id="outbound-saturdays" class="schedule-table">
+                    <h2>Saturday → Borek Fałęcki</h2>
+                    <table id="outbound-saturdays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                
+                <div id="outbound-sundays" class="schedule-table">
+                    <h2>Sunday & Holidays → Borek Fałęcki</h2>
+                    <table id="outbound-sundays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- INBOUND -->
+        <div id="inbound" class="direction-content">
+            <div class="tabs">
+                <button class="tab active" onclick="showSchedule('inbound', 'weekdays', this)">Weekdays</button>
+                <button class="tab" onclick="showSchedule('inbound', 'saturdays', this)">Saturday</button>
+                <button class="tab" onclick="showSchedule('inbound', 'sundays', this)">Sunday</button>
+            </div>
+            
+            <div class="schedule-content">
+                <div id="inbound-weekdays" class="schedule-table active">
+                    <h2>Weekdays → Taklińskiego</h2>
+                    <table id="inbound-weekdays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                
+                <div id="inbound-saturdays" class="schedule-table">
+                    <h2>Saturday → Taklińskiego</h2>
+                    <table id="inbound-saturdays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                
+                <div id="inbound-sundays" class="schedule-table">
+                    <h2>Sunday & Holidays → Taklińskiego</h2>
+                    <table id="inbound-sundays-table">
+                        <thead>
+                            <tr><th>Departure</th><th>Arrival</th><th>Bus #</th><th>Route</th></tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>Route Information</h3>
+            <div id="legend-content"></div>
+        </div>
+    </div>
+
+    <script>
+        // Schedule data - this would normally be loaded from a separate JSON file
+        const scheduleData = {
+            outbound: {
+                weekdays: [
+                    { departure: "04:28", arrival: "04:44", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "05:12", arrival: "05:23", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "05:15", arrival: "05:31", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "05:32", arrival: "05:43", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "05:49", arrival: "06:05", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:02", arrival: "06:13", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:14", arrival: "06:30", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:31", arrival: "06:42", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:40", arrival: "06:51", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "06:49", arrival: "07:05", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:03", arrival: "07:14", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:24", arrival: "07:40", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:41", arrival: "07:52", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:59", arrival: "08:15", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "08:10", arrival: "08:21", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "08:16", arrival: "08:27", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "08:34", arrival: "08:50", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "08:51", arrival: "09:02", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:04", arrival: "09:20", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:40", arrival: "09:51", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "09:44", arrival: "10:00", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "10:19", arrival: "10:35", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "10:54", arrival: "11:10", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "11:10", arrival: "11:21", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "11:34", arrival: "11:50", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "12:14", arrival: "12:30", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "12:40", arrival: "12:51", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "12:54", arrival: "13:10", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "13:44", arrival: "14:00", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "14:10", arrival: "14:21", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "14:15", arrival: "14:31", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "14:55", arrival: "15:11", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "15:12", arrival: "15:23", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "15:30", arrival: "15:46", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "15:40", arrival: "15:51", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "15:47", arrival: "15:58", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:05", arrival: "16:21", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:22", arrival: "16:33", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:40", arrival: "16:56", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:57", arrival: "17:08", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "17:10", arrival: "17:21", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "17:15", arrival: "17:31", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "17:32", arrival: "17:43", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "17:50", arrival: "18:06", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "18:07", arrival: "18:18", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "18:25", arrival: "18:41", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "18:40", arrival: "18:51", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "18:42", arrival: "18:53", bus: "475", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:00", arrival: "19:16", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:35", arrival: "19:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "20:09", arrival: "20:20", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "20:10", arrival: "20:26", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "20:45", arrival: "21:01", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "21:20", arrival: "21:36", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "21:39", arrival: "21:50", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "21:55", arrival: "22:11", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "22:35", arrival: "22:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "23:04", arrival: "23:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "23:15", arrival: "23:31", bus: "175", route: "Sidzina - Borek Fałęcki" }
+                ],
+                saturdays: [
+                    { departure: "01:14", arrival: "01:30", bus: "610", route: "Sidzina - Prądnik Czerwony" },
+                    { departure: "03:14", arrival: "03:30", bus: "610", route: "Sidzina - Prądnik Czerwony" },
+                    { departure: "05:48", arrival: "06:04", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:28", arrival: "06:44", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:08", arrival: "07:24", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:48", arrival: "08:04", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "08:04", arrival: "08:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "08:26", arrival: "08:42", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:16", arrival: "09:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:34", arrival: "09:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "09:56", arrival: "10:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "10:36", arrival: "10:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "11:04", arrival: "11:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "11:16", arrival: "11:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "11:56", arrival: "12:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "12:34", arrival: "12:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "12:36", arrival: "12:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "13:16", arrival: "13:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "13:56", arrival: "14:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "14:04", arrival: "14:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "14:36", arrival: "14:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "15:34", arrival: "15:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "15:56", arrival: "16:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:36", arrival: "16:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:56", arrival: "17:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "17:04", arrival: "17:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "17:56", arrival: "18:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "18:34", arrival: "18:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "18:36", arrival: "18:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:16", arrival: "19:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:56", arrival: "20:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "20:04", arrival: "20:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "20:35", arrival: "20:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "21:34", arrival: "21:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "21:55", arrival: "22:11", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "22:35", arrival: "22:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "23:15", arrival: "23:31", bus: "175", route: "Sidzina - Borek Fałęcki" }
+                ],
+                sundays: [
+                    { departure: "01:14", arrival: "01:30", bus: "610", route: "Sidzina - Prądnik Czerwony" },
+                    { departure: "03:14", arrival: "03:30", bus: "610", route: "Sidzina - Prądnik Czerwony" },
+                    { departure: "05:48", arrival: "06:04", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "06:28", arrival: "06:44", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:08", arrival: "07:24", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "07:48", arrival: "08:04", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "08:04", arrival: "08:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "08:26", arrival: "08:42", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:16", arrival: "09:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "09:34", arrival: "09:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "09:56", arrival: "10:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "10:36", arrival: "10:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "11:04", arrival: "11:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "11:16", arrival: "11:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "11:56", arrival: "12:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "12:34", arrival: "12:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "12:36", arrival: "12:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "13:16", arrival: "13:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "13:56", arrival: "14:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "14:04", arrival: "14:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "14:36", arrival: "14:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "15:34", arrival: "15:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "15:56", arrival: "16:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:36", arrival: "16:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "16:56", arrival: "17:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "17:04", arrival: "17:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "17:56", arrival: "18:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "18:34", arrival: "18:45", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "18:36", arrival: "18:52", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:16", arrival: "19:32", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "19:56", arrival: "20:12", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "20:04", arrival: "20:15", bus: "243", route: "Skawina - Borek Fałęcki" },
+                    { departure: "20:35", arrival: "20:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "21:55", arrival: "22:11", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "22:35", arrival: "22:51", bus: "175", route: "Sidzina - Borek Fałęcki" },
+                    { departure: "23:15", arrival: "23:31", bus: "175", route: "Sidzina - Borek Fałęcki" }
+                ]
+            },
+            inbound: {
+                weekdays: [
+                    { departure: "04:28", arrival: "04:39", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "04:37", arrival: "04:53", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "04:57", arrival: "05:08", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:11", arrival: "05:27", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:26", arrival: "05:37", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:36", arrival: "05:52", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:49", arrival: "06:00", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "05:54", arrival: "06:05", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "06:11", arrival: "06:27", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "06:29", arrival: "06:40", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "06:46", arrival: "07:02", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:04", arrival: "07:15", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:19", arrival: "07:30", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "07:21", arrival: "07:37", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:39", arrival: "07:50", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:56", arrival: "08:12", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:14", arrival: "08:25", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:26", arrival: "08:42", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:49", arrival: "09:00", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "09:06", arrival: "09:22", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "09:41", arrival: "09:57", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "10:16", arrival: "10:32", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "10:19", arrival: "10:30", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "10:56", arrival: "11:12", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:36", arrival: "11:52", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:49", arrival: "12:00", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "12:16", arrival: "12:32", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "12:56", arrival: "13:12", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "13:19", arrival: "13:30", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "13:36", arrival: "13:52", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:16", arrival: "14:32", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:34", arrival: "14:45", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:48", arrival: "14:59", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "14:51", arrival: "15:07", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "15:09", arrival: "15:20", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "15:26", arrival: "15:42", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "15:44", arrival: "15:55", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:01", arrival: "16:17", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:18", arrival: "16:29", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "16:19", arrival: "16:30", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:36", arrival: "16:52", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:54", arrival: "17:05", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:11", arrival: "17:27", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:29", arrival: "17:40", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:46", arrival: "18:02", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:48", arrival: "17:59", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "18:04", arrival: "18:15", bus: "475", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "18:21", arrival: "18:37", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "18:56", arrival: "19:12", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "19:18", arrival: "19:29", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "19:31", arrival: "19:47", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:08", arrival: "20:24", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:43", arrival: "20:59", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:49", arrival: "21:00", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "21:18", arrival: "21:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "21:58", arrival: "22:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "22:19", arrival: "22:30", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "22:38", arrival: "22:54", bus: "175", route: "Borek Fałęcki - Sidzina" }
+                ],
+                saturdays: [
+                    { departure: "05:08", arrival: "05:24", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:48", arrival: "06:04", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "06:28", arrival: "06:44", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:08", arrival: "07:24", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:48", arrival: "08:04", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:38", arrival: "08:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:46", arrival: "08:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "09:18", arrival: "09:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "09:58", arrival: "10:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "10:16", arrival: "10:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "10:38", arrival: "10:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:18", arrival: "11:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:46", arrival: "11:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "11:58", arrival: "12:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "12:38", arrival: "12:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "13:16", arrival: "13:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "13:18", arrival: "13:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "13:58", arrival: "14:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:38", arrival: "14:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:46", arrival: "14:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "15:18", arrival: "15:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "15:58", arrival: "16:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:16", arrival: "16:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "16:38", arrival: "16:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:18", arrival: "17:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:46", arrival: "17:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "17:58", arrival: "18:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "18:38", arrival: "18:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "19:16", arrival: "19:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "19:18", arrival: "19:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "19:58", arrival: "20:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:38", arrival: "20:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:46", arrival: "20:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "21:18", arrival: "21:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "21:34", arrival: "21:45", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "21:58", arrival: "22:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "22:38", arrival: "22:54", bus: "175", route: "Borek Fałęcki - Sidzina" }
+                ],
+                sundays: [
+                    { departure: "05:08", arrival: "05:24", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "05:48", arrival: "06:04", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "06:28", arrival: "06:44", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:08", arrival: "07:24", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "07:48", arrival: "08:04", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:38", arrival: "08:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "08:46", arrival: "08:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "09:18", arrival: "09:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "09:58", arrival: "10:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "10:16", arrival: "10:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "10:38", arrival: "10:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:18", arrival: "11:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "11:46", arrival: "11:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "11:58", arrival: "12:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "12:38", arrival: "12:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "13:16", arrival: "13:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "13:18", arrival: "13:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "13:58", arrival: "14:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:38", arrival: "14:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "14:46", arrival: "14:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "15:18", arrival: "15:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "15:58", arrival: "16:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "16:16", arrival: "16:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "16:38", arrival: "16:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:18", arrival: "17:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "17:46", arrival: "17:57", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "17:58", arrival: "18:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "18:38", arrival: "18:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "19:16", arrival: "19:27", bus: "243", route: "Borek Fałęcki - Skawina" },
+                    { departure: "19:18", arrival: "19:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "19:58", arrival: "20:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "20:38", arrival: "20:54", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "21:18", arrival: "21:34", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "21:58", arrival: "22:14", bus: "175", route: "Borek Fałęcki - Sidzina" },
+                    { departure: "22:38", arrival: "22:54", bus: "175", route: "Borek Fałęcki - Sidzina" }
+                ]
+            }
+        };
+
+        function loadScheduleData() {
+            try {
+                // Hide loading indicator
+                document.getElementById('loading').style.display = 'none';
+                
+                // Show the schedule sections
+                document.getElementById('outbound').style.display = 'block';
+                document.getElementById('outbound').classList.add('active');
+                
+                // Populate all tables
+                populateTable('outbound-weekdays-table', scheduleData.outbound.weekdays);
+                populateTable('outbound-saturdays-table', scheduleData.outbound.saturdays);
+                populateTable('outbound-sundays-table', scheduleData.outbound.sundays);
+                populateTable('inbound-weekdays-table', scheduleData.inbound.weekdays);
+                populateTable('inbound-saturdays-table', scheduleData.inbound.saturdays);
+                populateTable('inbound-sundays-table', scheduleData.inbound.sundays);
+                
+                // Populate legend
+                populateLegend();
+                
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = '<h3>Error Loading Schedule</h3><p>Unable to load bus schedule data. Please refresh the page to try again.</p>';
+            }
+        }
+
+        function populateTable(tableId, data) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            tbody.innerHTML = '';
+            
+            data.forEach(item => {
+                const row = tbody.insertRow();
+                row.innerHTML = `
+                    <td class="time">${item.departure}</td>
+                    <td class="time">${item.arrival}</td>
+                    <td class="bus-number">${item.bus}</td>
+                    <td>${item.route}</td>
+                `;
+            });
+        }
+
+        function populateLegend() {
+            const legendContent = document.getElementById('legend-content');
+            legendContent.innerHTML = `
+                <p><strong>Bus #175:</strong> Main line with frequent service (~16 minutes travel time)</p>
+                <p><strong>Bus #243:</strong> Agglomeration line connecting Skawina (~11 minutes travel time)</p>
+                <p><strong>Bus #475:</strong> Weekdays only service (~11 minutes travel time)</p>
+                <p><strong>Bus #610:</strong> Weekend night service only, outbound direction only (~16 minutes travel time)</p>
+                <br>
                 <p><strong>Notes:</strong></p>
                 <ul>
                     <li>NŻ - On request (flag stop)</li>
                     <li>Arrival times are estimated based on average travel time</li>
-                    <li>Bus #175 & #610: ~16 minutes travel time</li>
-                    <li>Bus #243 & #475: ~11 minutes travel time</li>
                     <li>Departure times may vary due to traffic conditions</li>
-                    <li>Schedule valid from dates indicated on each individual route</li>
                     <li>All times shown in 24-hour format</li>
-                    <li>Bus #475 operates weekdays only</li>
-                    <li>Bus #610 operates weekend nights only</li>
+                    <li>Schedule valid from dates indicated on original timetables</li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        function showSchedule(day) {
-            // Hide all schedule tables
-            const schedules = document.querySelectorAll('.schedule-table');
-            schedules.forEach(schedule => schedule.classList.remove('active'));
+            `;
+        }
+
+        function showDirection(direction, clickedElement) {
+            // Hide all direction contents
+            const directionContents = document.querySelectorAll('.direction-content');
+            directionContents.forEach(el => {
+                el.classList.remove('active');
+                el.style.display = 'none';
+            });
             
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            // Remove active class from all direction tabs
+            const directionTabs = document.querySelectorAll('.direction-tab');
+            directionTabs.forEach(el => el.classList.remove('active'));
             
-            // Show selected table
-            document.getElementById(day).classList.add('active');
+            // Show selected direction
+            const selectedDirection = document.getElementById(direction);
+            if (selectedDirection) {
+                selectedDirection.classList.add('active');
+                selectedDirection.style.display = 'block';
+            }
             
-            // Add active class to selected tab
-            event.target.classList.add('active');
+            // Add active class to clicked tab
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+            
+            // Reset and activate first day tab for the new direction
+            const dayTabs = document.querySelectorAll(`#${direction} .tab`);
+            const dayTables = document.querySelectorAll(`#${direction} .schedule-table`);
+            
+            dayTabs.forEach(el => el.classList.remove('active'));
+            dayTables.forEach(el => el.classList.remove('active'));
+            
+            // Activate first tab (weekdays)
+            if (dayTabs.length > 0) {
+                dayTabs[0].classList.add('active');
+            }
+            
+            const weekdaysTable = document.getElementById(`${direction}-weekdays`);
+            if (weekdaysTable) {
+                weekdaysTable.classList.add('active');
+            }
         }
         
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Bus schedule loaded successfully');
-        });
+        function showSchedule(direction, day, clickedElement) {
+            // Hide all schedule tables in current direction
+            const tables = document.querySelectorAll(`#${direction} .schedule-table`);
+            tables.forEach(el => el.classList.remove('active'));
+            
+            // Remove active class from all tabs in current direction
+            const tabs = document.querySelectorAll(`#${direction} .tab`);
+            tabs.forEach(el => el.classList.remove('active'));
+            
+            // Show selected table
+            const selectedTable = document.getElementById(`${direction}-${day}`);
+            if (selectedTable) {
+                selectedTable.classList.add('active');
+            }
+            
+            // Add active class to clicked tab
+            if (clickedElement) {
+                clickedElement.classList.add('active');
+            }
+        }
+
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadScheduleData);
     </script>
 </body>
 </html>
